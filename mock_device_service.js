@@ -1,18 +1,23 @@
 'use strict';
 
 var net = require('net');
-const TPLinkProtocol = require('./tp_link_protocol');
+const TPLinkProtocol = require('tp_link_smart_plug').Protocol;
+
+var relayState = 0;
+var ledOff = 0;
 
 function handleCommand(command, args) {
   switch(command) {
     case("get_sysinfo"):
       console.log("get_sysinfo");
-      return {"alias": "Mock Device"};
+      return {"alias": "Mock Device", "relay_state": relayState, "led_off": ledOff};
     case("set_relay_state"):
       console.log("set_relay_state: " + args["state"]);
+      relayState = args["state"];
       return null;
     case("set_led_off"):
       console.log("set_led_off: " + args["off"]);
+      ledOff = args["off"];
       return null;
   }
 }

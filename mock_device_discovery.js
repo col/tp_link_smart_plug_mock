@@ -2,7 +2,7 @@
 
 const dgram = require('dgram');
 const server = dgram.createSocket('udp4');
-const TPLinkProtocol = require('./tp_link_protocol');
+const TPLinkProtocol = require('tp_link_smart_plug').Protocol;
 
 server.on('error', (err) => {
   console.log(`server error:\n${err.stack}`);
